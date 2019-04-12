@@ -25,29 +25,29 @@ public class RulesAction {
 	@PostMapping("/createRules")
 	public RestData createRules(Rules rule) {
 		rulesService.saveRule(rule);
-		return new RestData(BaseHttpCode.SUCCESS.getCode(), BaseHttpMessage.SUCCESS.getMessage(), "创建规则成功");
+		return RestData.builderOfSuccess().details("创建规则成功");
 	}
 	
 	@GetMapping("getRulesByMid")
 	public RestData getRulesByMid(RuleDto dto) {
 		List<Rules> rules = rulesService.getAllRulesByMid(dto);
-		return new RestData(BaseHttpCode.SUCCESS.getCode(), BaseHttpMessage.SUCCESS.getMessage(), rules);
+        return RestData.builderOfSuccess().details(rules);
 	}
 	
 	@GetMapping("/getRulesByHtmlId")
 	public RestData getRulesByHtmlId(String htmlId) {
 		List<Rules> rules = rulesService.getRulesByHtmlId(htmlId);
-		return new RestData(BaseHttpCode.SUCCESS.getCode(), BaseHttpMessage.SUCCESS.getMessage(), rules);
+        return RestData.builderOfSuccess().details(rules);
 	}
 	
 	@PostMapping("freezeRules")
 	public RestData freezeRule() {
-		return new RestData(BaseHttpCode.SUCCESS.getCode(), BaseHttpMessage.SUCCESS.getMessage(), "禁用规则成功");
+        return RestData.builderOfSuccess().details("冻结规则成功");
 	}
 	
 	@GetMapping("/getAllRules")
 	public RestData getAllRules() {
 		List<Rules> rules = rulesService.getAllRules();
-		return new RestData(BaseHttpCode.SUCCESS.getCode(), BaseHttpMessage.SUCCESS.getMessage(), rules);
+        return RestData.builderOfSuccess().details(rules);
 	}
 }

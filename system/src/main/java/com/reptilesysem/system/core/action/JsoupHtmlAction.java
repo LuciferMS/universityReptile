@@ -27,9 +27,9 @@ public class JsoupHtmlAction {
             Document doc = Jsoup.connect(url).get();
             HtmlInfo htmlInfo = new HtmlInfo(doc.title(), doc.html(), url);
             service.save(htmlInfo);
-            return new RestData(BaseHttpCode.SUCCESS.getCode(), BaseHttpMessage.SUCCESS.getMessage(), "获取成功");
+            return RestData.builderOfSuccess().details("获取成功");
         }catch (Exception e){
-            return new RestData(BaseHttpCode.FAIL.getCode(), BaseHttpMessage.FAIL.getMessage(), null);
+            return RestData.builderOfFail().details("获取失败");
         }
     }
 
@@ -39,7 +39,7 @@ public class JsoupHtmlAction {
             Document doc = Jsoup.connect(url).get();
             HtmlInfo htmlInfo = new HtmlInfo(doc.title(), doc.html(), url);
             service.save(htmlInfo);
-            return new RestData(BaseHttpCode.SUCCESS.getCode(),  BaseHttpMessage.SUCCESS.getMessage(), "获取成功");
+            return RestData.builderOfSuccess().details("获取成功");
         }catch (Exception e){
             return new RestData(BaseHttpCode.FAIL.getCode(), "Error", null);
         }

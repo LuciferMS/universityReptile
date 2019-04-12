@@ -8,7 +8,6 @@
         <module>commen</module>
 		<module>system</module>
         <module>logging</module>
-        <module>activity</module>
     </modules>
 
     <parent>

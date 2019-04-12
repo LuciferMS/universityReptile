@@ -46,4 +46,8 @@ public class SearchHistory {
 	    this.isSuccess = true;
 		this.value = value;
 	}
+
+	public static SearchHistory getBySiteName(String siteName){
+		return new SearchHistory(siteName);
+	}
 }

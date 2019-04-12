@@ -29,39 +29,23 @@ public class MoudlesAction {
 	public RestData createMoudles() {
 		String moudleName = request.getParameter("moudleName");
 		moudlesService.saveMoudles(new Moudles(moudleName));
-		return new RestData(
-		        BaseHttpCode.SUCCESS.getCode(),
-                BaseHttpMessage.SUCCESS.getMessage(),
-                "创建模型成功"
-        );
+        return RestData.builderOfSuccess().details("创建模型成功");
 	}
 	
 	@GetMapping("/getMoudles")
 	private RestData getMoudles() {
 		List<Moudles> moudles = moudlesService.getMoudles();
-		return new RestData(
-		        BaseHttpCode.SUCCESS.getCode(),
-                BaseHttpMessage.SUCCESS.getMessage(),
-                moudles
-        );
+        return RestData.builderOfSuccess().details(moudles);
 	}
 
 	@PostMapping("/freezeMoudles")
 	public RestData freezeMoudles() {
-		return new RestData(
-		        BaseHttpCode.SUCCESS.getCode(),
-                BaseHttpMessage.SUCCESS.getMessage(),
-                "模型禁用成功"
-        );
+	    return RestData.builderOfSuccess().details("冻结模型成功");
 	}
 	
 	@GetMapping("/getMoudlesByHtmlId")
 	public RestData getMoudlesByHtmlId(String htmlId) {
 		List<Moudles> moudles = moudlesService.findMoudlesByHtmlId(htmlId);
-		return new RestData(
-		        BaseHttpCode.SUCCESS.getCode(),
-                BaseHttpMessage.SUCCESS.getMessage(),
-                moudles
-        );
+		return RestData.builderOfSuccess().details(moudles);
 	}
 }

@@ -1,8 +1,6 @@
 package com.reptilesysem.system.core.action;
 
 
-import com.commen.base.BaseHttpCode;
-import com.commen.base.BaseHttpMessage;
 import com.commen.pojo.RestData;
 import com.reptilesysem.system.core.pojo.HtmlAnalysis;
 import com.reptilesysem.system.core.pojo.SearchHistory;
@@ -30,11 +28,7 @@ public class SearchAction {
 	@GetMapping("/commentSearch")
 	public RestData commentSearch(String siteName) {
         List<HtmlAnalysis> htmlAnalyses = searchService.getHtmlAnalysis(siteName);
-        historyService.saveHistory(new SearchHistory(siteName));
-		return new RestData(
-                    BaseHttpCode.SUCCESS.getCode(),
-                    BaseHttpMessage.SUCCESS.getMessage(),
-                    htmlAnalyses
-        );
+        historyService.saveHistory(SearchHistory.getBySiteName(siteName));
+		return RestData.builderOfSuccess().details(htmlAnalyses);
 	}
 }

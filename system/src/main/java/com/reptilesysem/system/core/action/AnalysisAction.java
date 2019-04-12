@@ -28,37 +28,35 @@ public class AnalysisAction {
 	@Autowired
 	private IHtmlAnalysisService analysisService;
 
-	@Autowired
-	private HttpServletRequest request;
 	
 	@PostMapping("/testAnalysis")
 	public RestData testAnalysis(String rulesId, String htmlInfoId) {
 		HtmlAnalysis analysis = analysisService.testAnalysis(rulesId, htmlInfoId);
-		return new RestData(BaseHttpCode.SUCCESS.getCode(), BaseHttpMessage.SUCCESS.getMessage(), analysis);
+        return RestData.builderOfSuccess().details(analysis);
 	}
 	
 	@PostMapping("/analysisByModule")
 	public RestData analysisByModule( String moduleId , String htmlInfoId) {
-		List<HtmlAnalysis> analysies = analysisService.analysisByMoudle(moduleId, htmlInfoId);
-		return new RestData(BaseHttpCode.SUCCESS.getCode(), BaseHttpMessage.SUCCESS.getMessage(), analysies);
+		List<HtmlAnalysis> analysis = analysisService.analysisByMoudle(moduleId, htmlInfoId);
+        return RestData.builderOfSuccess().details(analysis);
 	}
 	
 	@PostMapping("/analysisByRules")
 	public RestData analysisByRules(String ruleId, String htmlInfoId) {
 		HtmlAnalysis analysis = analysisService.analysisByRules(ruleId, htmlInfoId);
-		return new RestData(BaseHttpCode.SUCCESS.getCode(), BaseHttpMessage.SUCCESS.getMessage(), analysis);
+        return RestData.builderOfSuccess().details(analysis);
 	}
 	
 	@GetMapping("/getAnalysisByMid")
 	public RestData getAnalysisByMid(String mid, String htmlInfoId) {
-		List<HtmlAnalysis> htmlAnalysies = analysisService.getAnalysisByMid(mid, htmlInfoId);
-		return new RestData(BaseHttpCode.SUCCESS.getCode(), BaseHttpMessage.SUCCESS.getMessage(), htmlAnalysies);
+		List<HtmlAnalysis> analysis = analysisService.getAnalysisByMid(mid, htmlInfoId);
+        return RestData.builderOfSuccess().details(analysis);
 	}
 	
 	@GetMapping("/getAnalysisByRule")
 	public RestData getAnalysisByRule(String ruleId, String htmlInfoId) {
 		HtmlAnalysis analysis = analysisService.getAnalysisByRuleId(ruleId, htmlInfoId);
-		return new RestData(BaseHttpCode.SUCCESS.getCode(), BaseHttpMessage.SUCCESS.getMessage(), analysis);
+        return RestData.builderOfSuccess().details(analysis);
 	}
 
 }
