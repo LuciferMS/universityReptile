@@ -36,7 +36,7 @@ public class HtmlAnalysisServiceImpl implements IHtmlAnalysisService{
 	private IRulesDao rulesDao;
 	
 	@Autowired
-	private IMoudlesDao moudleDao;
+	private IMoudlesDao moduleDao;
 
 	@Override
 	public HtmlAnalysis saveAnalysis(HtmlAnalysis analysis) {
@@ -55,16 +55,15 @@ public class HtmlAnalysisServiceImpl implements IHtmlAnalysisService{
 	}
 
 	@Override
-	public List<HtmlAnalysis> analysisByMoudle(String moudleId, String htmlInfoId) {
-		Moudles moudles = moudleDao.findById(moudleId).get();
+	public List<HtmlAnalysis> analysisByMoudle(String mid, String htmlInfoId) {
 		HtmlInfo htmlInfo = htmlInfoDao.findById(htmlInfoId).get();
 		Document doc = Jsoup.parse(htmlInfo.getHtml());
-		List<Rules> rules = moudles.getRules();
+		List<Rules> rules = rulesDao.findAllByMid(mid);
 		List<HtmlAnalysis> analysies = new ArrayList<HtmlAnalysis>();
 		rules.stream().forEach((item) -> {
 			Elements resultLinks = doc.select(item.getValue());
 			String result = resultLinks.toString();
-			HtmlAnalysis analysis = new HtmlAnalysis(result, item.getType(), htmlInfoId, item.getRid(), moudleId);
+			HtmlAnalysis analysis = new HtmlAnalysis(result, item.getType(), htmlInfoId, item.getRid(), mid);
 			analysisDao.save(analysis);
 			analysies.add(analysis);
 		});
@@ -93,5 +92,10 @@ public class HtmlAnalysisServiceImpl implements IHtmlAnalysisService{
 		List<HtmlAnalysis> htmlAnalysies = analysisDao.findByMIdAndHtmlInfoId(mid, htmlInfoId);
 		return htmlAnalysies;
 	}
+
+    @Override
+    public List<HtmlAnalysis> getAnalysisByName(String siteName) {
+        return analysisDao.getBySiteName(siteName);
+    }
 
 }

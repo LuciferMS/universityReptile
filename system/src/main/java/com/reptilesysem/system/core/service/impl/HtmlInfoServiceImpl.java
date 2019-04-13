@@ -14,8 +14,7 @@ public class HtmlInfoServiceImpl implements IHtmlInfoService {
 
     @Override
     public HtmlInfo save(HtmlInfo htmlInfo) {
-        htmlInfoDao.save(htmlInfo);
-        return htmlInfo;
+        return htmlInfoDao.save(htmlInfo);
     }
 
 }

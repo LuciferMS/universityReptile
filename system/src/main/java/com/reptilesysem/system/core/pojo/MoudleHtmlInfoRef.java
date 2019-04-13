@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="t_moudleHtmlRef")
 public class MoudleHtmlInfoRef {
+
 	@Id
     @GeneratedValue(generator = "id")
     @GenericGenerator(name = "id", strategy = "uuid")

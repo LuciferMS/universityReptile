@@ -2,16 +2,7 @@ package com.reptilesysem.system.core.pojo;
 
 import java.util.Date;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.GenericGenerator;
@@ -20,6 +11,9 @@ import org.hibernate.annotations.Type;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Data
 @AllArgsConstructor
@@ -27,11 +21,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="t_htmlAnalysis")
 @DynamicInsert
+@EntityListeners(AuditingEntityListener.class)
 public class HtmlAnalysis {
 	
 	@Id 
-	@GeneratedValue(generator = "hid")    
-	@GenericGenerator(name = "hid", strategy = "uuid") 
+	@GeneratedValue(generator = "hid")
+	@GenericGenerator(name = "hid", strategy = "uuid")
 	private String hId;
 	
 //	@ManyToOne(cascade=CascadeType.ALL, targetEntity=Rules.class)
@@ -62,10 +57,12 @@ public class HtmlAnalysis {
 	
 	@Column(nullable=false)
 	private String mId;
-	
+
+	@CreatedDate
 	@Column(nullable=true)
 	private Date createDate;
-	
+
+	@LastModifiedDate
 	@Column(nullable=true)
 	private Date lastUpdateDate;
 	
@@ -79,8 +76,6 @@ public class HtmlAnalysis {
 		this.htmlInfoId = htmlInfoId;
 		this.rId = rId;
 		this.mId = mId;
-		this.createDate = new Date();
-		this.lastUpdateDate = new Date();
 	}
 	
 	

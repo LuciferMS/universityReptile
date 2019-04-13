@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.reptilesysem.system.core.dto.RuleDto;
 import com.reptilesysem.system.core.pojo.Rules;
+import org.dom4j.rule.Rule;
 
 public interface IRulesService {
 
@@ -14,5 +15,6 @@ public interface IRulesService {
 	List<Rules> getAllRules();
 
 	List<Rules> getRulesByHtmlId(String htmlId);
-	
+
+    Integer freezeRule(String ruleId);
 }

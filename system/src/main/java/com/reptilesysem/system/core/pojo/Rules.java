@@ -4,15 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.GenericGenerator;
@@ -20,6 +12,9 @@ import org.hibernate.annotations.GenericGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * 	数据分析规则
@@ -30,8 +25,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="t_rules")
 @DynamicInsert
+@EntityListeners(AuditingEntityListener.class)
+@Table(name="t_rules")
 public class Rules {
 	@Id
 	@GeneratedValue(generator = "rid")    
@@ -52,14 +48,16 @@ public class Rules {
 	
 	@Column(nullable=false)
 	private String mid;
-	
+
+	@CreatedDate
 	@Column(nullable=true)
 	private Date createTime;
 	
 	@JoinColumn(name="rId")
 	@OneToMany(cascade=CascadeType.ALL, targetEntity=HtmlAnalysis.class)
 	private List<HtmlAnalysis> htmlAnalysies;
-	
+
+	@LastModifiedDate
 	@Column(nullable=true)
 	private Date lastUpdateTime;
 	
@@ -75,8 +73,6 @@ public class Rules {
 		this.value = value;
 		this.ruleName = ruleName;
 		this.type = ruleType;
-		this.createTime = new Date();
-		this.lastUpdateTime = new Date();
 	}
 
 	public Rules(String rid,String ruleName, String value, String type, String mid, Date createTime, Date lastUpdateTime, int status, int useTimes) {
@@ -85,8 +81,6 @@ public class Rules {
 		this.value = value;
 		this.type = type;
 		this.mid = mid;
-		this.createTime = createTime;
-		this.lastUpdateTime = lastUpdateTime;
 		this.status = status;
 		this.useTimes = useTimes;
 	}

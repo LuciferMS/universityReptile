@@ -58,7 +58,12 @@ public class RulesServiceImpl implements IRulesService{
 	    return rules;
 	}
 
-	class Spec implements Specification<Rules> {
+    @Override
+    public Integer freezeRule(String ruleId) {
+        return 1;
+    }
+
+    class Spec implements Specification<Rules> {
 
 	    private RuleDto rule;
 

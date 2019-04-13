@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
 
@@ -19,7 +21,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "t_htmlInfo")
 @DynamicInsert
+@EntityListeners(AuditingEntityListener.class)
 public class HtmlInfo {
+
     @Id
     @GeneratedValue(generator = "html_id")
     @GenericGenerator(name = "html_id", strategy = "uuid")
@@ -41,6 +45,7 @@ public class HtmlInfo {
     @Column(nullable=true)
     private String type;
 
+    @CreatedDate
     @Column(nullable=true)
     private Date createTime;
     

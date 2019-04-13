@@ -3,14 +3,7 @@ package com.reptilesysem.system.core.pojo;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.GenericGenerator;
@@ -18,6 +11,9 @@ import org.hibernate.annotations.GenericGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  *  	规则模型
@@ -28,20 +24,24 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="t_moudles")
 @DynamicInsert
+@EntityListeners(AuditingEntityListener.class)
+@Table(name="t_moudles")
 public class Moudles {
 	
 	@Id
 	@GeneratedValue(generator = "mid")    
 	@GenericGenerator(name = "mid", strategy = "uuid") 
 	private String mid;
-	
+
+	@Column(nullable = false)
 	private String mouName;
-	
+
+	@CreatedDate
 	@Column(nullable=true)
 	private Date createDate;
-	
+
+	@LastModifiedDate
 	@Column(nullable=true)
 	private Date lastUpdateDate;
 	
@@ -59,14 +59,10 @@ public class Moudles {
 	public Moudles(String mouName) {
 		super();
 		this.mouName = mouName;
-		this.createDate = new Date();
-		this.lastUpdateDate = new Date();
 	}
 
-	public Moudles(String mouName, Date createDate, Date lastUpdateDate, int status) {
+	public Moudles(String mouName, int status) {
 		this.mouName = mouName;
-		this.createDate = createDate;
-		this.lastUpdateDate = lastUpdateDate;
 		this.status = status;
 	}
 }

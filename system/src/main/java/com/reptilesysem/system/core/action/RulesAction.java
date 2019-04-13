@@ -41,7 +41,8 @@ public class RulesAction {
 	}
 	
 	@PostMapping("freezeRules")
-	public RestData freezeRule() {
+	public RestData freezeRule(String ruleId) {
+	    rulesService.freezeRule(ruleId);
         return RestData.builderOfSuccess().details("冻结规则成功");
 	}
 	

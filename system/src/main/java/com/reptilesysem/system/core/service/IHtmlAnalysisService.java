@@ -18,5 +18,5 @@ public interface IHtmlAnalysisService {
 
 	List<HtmlAnalysis> getAnalysisByMid(String mid, String htmlInfoId);
 
-	
+    List<HtmlAnalysis> getAnalysisByName(String siteName);
 }

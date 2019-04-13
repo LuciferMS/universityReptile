@@ -33,7 +33,7 @@ public class MoudleServiceImpl implements IMoudlesService{
 
 	@Override
 	public List<Moudles> getMoudles() {
-		return (List<Moudles>) moudlesDao.findAllMoudles();
+		return (List<Moudles>) moudlesDao.findAll();
 	}
 
 	@Override

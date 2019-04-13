@@ -10,14 +10,16 @@ import org.springframework.data.repository.query.Param;
 
 public interface IHtmlAnalysisDao extends CrudRepository<HtmlAnalysis, String>{
 
-	public List<HtmlAnalysis> findByHtmlInfoId(String htmlInfoId);
+    List<HtmlAnalysis> findByHtmlInfoId(String htmlInfoId);
 
-	public HtmlAnalysis findByRIdAndHtmlInfoId(String ruleId, String htmlInfoId);
+	HtmlAnalysis findByRIdAndHtmlInfoId(String ruleId, String htmlInfoId);
 
-	public List<HtmlAnalysis> findByMIdAndHtmlInfoId(String mid, String htmlInfoId);
+	List<HtmlAnalysis> findByMIdAndHtmlInfoId(String mid, String htmlInfoId);
 
 	@Query(value = "SELECT * FROM t_htmlanalysis h WHERE h.htmlInfoId IN (" +
-            "   SELECT i.id FROM t_htmlInfo i WHERE i.name LIKE CONCAT('%', :siteName, '%'))",
+            "   SELECT i.id FROM t_htmlInfo i " +
+            "WHERE i.name LIKE CONCAT('%', :siteName, '%')" +
+            ")",
 			nativeQuery = true)
-    public List<HtmlAnalysis> getBySiteName(@Param("siteName") String siteName);
+    List<HtmlAnalysis> getBySiteName(@Param("siteName") String siteName);
 }
