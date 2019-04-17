@@ -1,10 +1,12 @@
 package com.reptilesysem.system.core.pojo;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -26,8 +28,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
-@Table(name="t_moudles")
-public class Moudles {
+@Table(name="system_modules")
+public class Modules {
 	
 	@Id
 	@GeneratedValue(generator = "mid")    
@@ -37,9 +39,9 @@ public class Moudles {
 	@Column(nullable = false)
 	private String mouName;
 
-	@CreatedDate
+	@CreationTimestamp
 	@Column(nullable=true)
-	private Date createDate;
+	private Timestamp createDate;
 
 	@LastModifiedDate
 	@Column(nullable=true)
@@ -56,12 +58,12 @@ public class Moudles {
 	@Column(nullable=true, columnDefinition="INT default 1")
 	private int status;
 
-	public Moudles(String mouName) {
+	public Modules(String mouName) {
 		super();
 		this.mouName = mouName;
 	}
 
-	public Moudles(String mouName, int status) {
+	public Modules(String mouName, int status) {
 		this.mouName = mouName;
 		this.status = status;
 	}

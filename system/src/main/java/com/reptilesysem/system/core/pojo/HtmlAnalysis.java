@@ -1,9 +1,11 @@
 package com.reptilesysem.system.core.pojo;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -19,7 +21,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="t_htmlAnalysis")
+@Table(name="system_htmlAnalysis")
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
 public class HtmlAnalysis {
@@ -58,9 +60,9 @@ public class HtmlAnalysis {
 	@Column(nullable=false)
 	private String mId;
 
-	@CreatedDate
+	@CreationTimestamp
 	@Column(nullable=true)
-	private Date createDate;
+	private Timestamp createDate;
 
 	@LastModifiedDate
 	@Column(nullable=true)

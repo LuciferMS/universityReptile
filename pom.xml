@@ -8,6 +8,7 @@
         <module>commen</module>
 		<module>system</module>
         <module>logging</module>
+        <module>permission</module>
     </modules>
 
     <parent>
@@ -92,11 +93,6 @@
             <version>2.7.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.46</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/org.jodd/jodd-core -->
         <dependency>
             <groupId>org.jodd</groupId>
@@ -140,6 +136,13 @@
             <artifactId>log4jdbc</artifactId>
             <version>1.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.6</version>
+        </dependency>
+
     </dependencies>
 
 	<build>

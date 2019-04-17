@@ -5,12 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -19,7 +21,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "t_htmlInfo")
+@Table(name = "system_htmlInfo")
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
 public class HtmlInfo {
@@ -32,7 +34,9 @@ public class HtmlInfo {
     @Column(name = "name")
     private String name;
 
-    //spring data jpa 存储大型文本注解
+    /**
+     * spring data jpa 存储大型文本注解
+     */
     @Lob
     @Basic(fetch = FetchType.LAZY)
     @Type(type="text")
@@ -45,9 +49,9 @@ public class HtmlInfo {
     @Column(nullable=true)
     private String type;
 
-    @CreatedDate
+    @CreationTimestamp
     @Column(nullable=true)
-    private Date createTime;
+    private Timestamp createTime;
     
     @Column(nullable=true)
     private Date lastUpdateTime;

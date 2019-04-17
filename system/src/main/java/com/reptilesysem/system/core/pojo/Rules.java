@@ -1,11 +1,14 @@
 package com.reptilesysem.system.core.pojo;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -27,7 +30,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
-@Table(name="t_rules")
+@Table(name="system_rules")
 public class Rules {
 	@Id
 	@GeneratedValue(generator = "rid")    
@@ -49,9 +52,9 @@ public class Rules {
 	@Column(nullable=false)
 	private String mid;
 
-	@CreatedDate
+	@CreationTimestamp
 	@Column(nullable=true)
-	private Date createTime;
+	private Timestamp createTime;
 	
 	@JoinColumn(name="rId")
 	@OneToMany(cascade=CascadeType.ALL, targetEntity=HtmlAnalysis.class)

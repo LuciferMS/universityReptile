@@ -12,11 +12,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * module与html之间的映射，考虑一下要不要去掉..
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name="t_moudleHtmlRef")
+@Table(name="system_moudleHtmlRef")
 public class MoudleHtmlInfoRef {
 
 	@Id

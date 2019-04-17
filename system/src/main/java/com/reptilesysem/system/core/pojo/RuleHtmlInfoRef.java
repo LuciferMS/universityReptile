@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name="t_ruleHtmlRef")
+@Table(name="system_ruleHtmlRef")
 public class RuleHtmlInfoRef {
 	@Id
     @GeneratedValue(generator = "id")

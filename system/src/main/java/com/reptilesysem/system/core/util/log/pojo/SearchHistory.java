@@ -1,16 +1,15 @@
-package com.reptilesysem.system.core.pojo;
+package com.reptilesysem.system.core.util.log.pojo;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
@@ -22,7 +21,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="t_history")
+@Table(name="system_history")
 @EntityListeners(AuditingEntityListener.class)
 public class SearchHistory {
 	
@@ -31,15 +30,27 @@ public class SearchHistory {
 	@GenericGenerator(name = "id", strategy = "uuid") 
 	private String id;
 
+    /**
+     * 搜素内容
+     */
 	@Column(nullable = false)
-	private String value;//搜索内容
+	private String value;
 
-    @CreatedDate
-    @Column(nullable = false)
-	private Date createDate;
+	@Column(nullable = false)
+	private String path;
 
+    /**
+     * 搜索时间
+     */
+    @CreationTimestamp
     @Column(nullable = false)
-	private Boolean isSuccess;//是否成功
+	private Timestamp createDate;
+
+    /**
+     * 是否成功..
+     */
+    @Column(nullable = false, columnDefinition="INT default 0")
+	private Boolean isSuccess;
 
 
     public static SearchHistory builderOfSuccess(){

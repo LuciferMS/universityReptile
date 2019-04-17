@@ -18,7 +18,6 @@ import com.reptilesysem.system.core.dao.IMoudlesDao;
 import com.reptilesysem.system.core.dao.IRulesDao;
 import com.reptilesysem.system.core.pojo.HtmlAnalysis;
 import com.reptilesysem.system.core.pojo.HtmlInfo;
-import com.reptilesysem.system.core.pojo.Moudles;
 import com.reptilesysem.system.core.pojo.Rules;
 import com.reptilesysem.system.core.service.IHtmlAnalysisService;
 

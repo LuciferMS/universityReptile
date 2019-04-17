@@ -16,8 +16,8 @@ public interface IHtmlAnalysisDao extends CrudRepository<HtmlAnalysis, String>{
 
 	List<HtmlAnalysis> findByMIdAndHtmlInfoId(String mid, String htmlInfoId);
 
-	@Query(value = "SELECT * FROM t_htmlanalysis h WHERE h.htmlInfoId IN (" +
-            "   SELECT i.id FROM t_htmlInfo i " +
+	@Query(value = "SELECT * FROM system_htmlanalysis h WHERE h.htmlInfoId IN (" +
+            "   SELECT i.id FROM system_htmlInfo i " +
             "WHERE i.name LIKE CONCAT('%', :siteName, '%')" +
             ")",
 			nativeQuery = true)
